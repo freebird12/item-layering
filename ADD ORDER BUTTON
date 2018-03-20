@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using claa_dll;
+using class_bo;
+
+namespace WebApplication3
+{
+
+      
+    public partial class ADD_ORDER : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            this.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            
+
+        string item_name = DropDownList1.Text;
+            int quantity = Convert.ToInt32(TextBox2.Text);
+            string cust_name = TextBox3.Text;
+            long phone = Convert.ToInt64(TextBox4.Text);
+            string email = TextBox5.Text;
+            DateTime order_date = DateTime.Now;
+       //     int total;
+      //      int price;
+            //= quantity * price;
+
+            Class1 obj = new Class1 (item_name, quantity, cust_name, phone, email, order_date);
+
+
+            oper ac = new oper();
+            int oid = ac.add_order(obj);
+            if (oid > 0)
+            {
+
+                Response.Write("<script>alert('Added successfully with the id" + oid + "')</script>");
+
+            }
+            else
+                Response.Write("<script>alert('something went wrong')</script>");
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("view.aspx");
+            Server.Transfer("View.aspx");
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("main.aspx");
+            Server.Transfer("main.aspx");
+        }
+    }
+}
