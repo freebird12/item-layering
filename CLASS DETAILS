@@ -1,0 +1,182 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace class_bo
+{
+    public class Class1
+    {
+
+        int order_id;
+        string item_name;
+        int quantity;
+        string cust_name;
+        long phone;
+        string email;
+        DateTime mdate;
+        DateTime order_date;
+        int price;
+
+        int total;
+
+        public int Order_id
+        {
+            get
+            {
+                return order_id;
+            }
+
+            set
+            {
+                order_id = value;
+            }
+        }
+
+        public string Item_name
+        {
+            get
+            {
+                return item_name;
+            }
+
+            set
+            {
+                item_name = value;
+            }
+        }
+
+        public int Quantity
+        {
+            get
+            {
+                return quantity;
+            }
+
+            set
+            {
+                quantity = value;
+            }
+        }
+
+        public string Cust_name
+        {
+            get
+            {
+                return cust_name;
+            }
+
+            set
+            {
+                cust_name = value;
+            }
+        }
+
+        public long Phone
+        {
+            get
+            {
+                return phone;
+            }
+
+            set
+            {
+                phone = value;
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
+        }
+
+        public DateTime Mdate
+        {
+            get
+            {
+                return mdate;
+            }
+
+            set
+            {
+                mdate = value;
+            }
+        }
+
+        public DateTime Order_date
+        {
+            get
+            {
+                return order_date;
+            }
+
+            set
+            {
+                order_date = value;
+            }
+        }
+
+        public int Total
+        {
+            get
+            { return total; }
+            set
+            {
+                total = pricecal(Quantity,item_name);
+            }
+        }
+
+      /*  public int Price
+        {
+            get
+            {
+                return price;
+            }
+
+            set
+            {
+                price = pricecal();
+            }
+        }
+        */
+        public Class1()
+        { }
+
+        public Class1(string item_name, int quantity, string cust_name, long phone, string email, DateTime order_date)
+        {
+            this.item_name = item_name;
+            this.quantity = quantity;
+            this.cust_name = cust_name;
+            this.phone = phone;
+            this.email = email;
+          //  this.total = Price *quantity;
+            this.order_date = order_date;
+        }
+
+
+        public int pricecal(int Quantity,string iname)
+        {
+            int price = 0;
+
+            if (Item_name == "memory card")
+                price = 2000*quantity;
+            else if (item_name =="laptop")
+                price = 35000*quantity;
+            else if (Item_name == "wallet")
+                price = 1000*quantity;
+            else if (Item_name == "power bank")
+                price = 5500*quantity;
+
+            return price;
+        }
+    }
+}
