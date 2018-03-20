@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using class_bo;
+using System.Data.SqlClient;
+using System.Data;
+
+namespace claa_dll
+{
+    public class oper
+    {
+      
+            int order_id;
+            string item_name;
+            int quantity;
+            string cust_name;
+            long phone;
+            string email;
+            DateTime order_date;
+            DateTime m_date;
+
+
+
+       
+        
+        public oper()
+            { }
+
+            public int add_order(Class1 obj)
+        {
+            SqlConnection con = new SqlConnection("server=intvmsql01;user id=pj01tms55_1718;password=tcstvm;database=db01tms55_1718");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("order_1416", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+           
+          cmd.Parameters.AddWithValue("@iname", obj.Item_name);
+            cmd.Parameters.AddWithValue("@total", obj.Total);
+            cmd.Parameters.AddWithValue("@cname", obj.Cust_name);
+            cmd.Parameters.AddWithValue("@quantity", obj.Quantity);
+            cmd.Parameters.AddWithValue("@phone", obj.Phone);
+            cmd.Parameters.AddWithValue("@email", obj.Email);
+            cmd.Parameters.AddWithValue("@order_date", obj.Order_date);
+        //    cmd.Parameters.AddWithValue("@order_date", obj.Order_date);
+            cmd.Parameters.AddWithValue("@order_id", 0);
+            cmd.Parameters["@order_id"].Direction = ParameterDirection.Output;
+           SqlDataReader read_val = cmd.ExecuteReader();
+            Class1 acobj = new Class1();
+            acobj.Quantity = Convert.ToInt32(read_val["qavail"]);
+            int rowaffected = cmd.ExecuteNonQuery();
+
+            if (rowaffected > 0)
+            {
+                int oid = Convert.ToInt32(cmd.Parameters["@order_id"].Value);
+                //string i_name = (cmd.Parameters["@i_name"]);
+
+                return oid;
+
+            }
+            else
+
+                return 0;
+        }
+
+        public List<Class1> view()
+        {
+            SqlConnection con = new SqlConnection("server=intvmsql01;user id=pj01tms55_1718;password=tcstvm;database=db01tms55_1718");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("view_1413", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader rowread = cmd.ExecuteReader();
+            List<Class1> viewlist = new List<Class1>();
+            while (rowread.Read())
+            {
+                Class1 acobj = new Class1();
+                acobj.Order_id = Convert.ToInt32(rowread["order_id"]);
+              
+                acobj.Item_name = rowread["item_name"].ToString();
+                acobj.Quantity = Convert.ToInt32(rowread["quantity"]);
+                acobj.Cust_name = rowread["cname"].ToString();
+                acobj.Phone = Convert.ToInt64(rowread["phone"]);
+                acobj.Email = rowread["email"].ToString();
+                acobj.Mdate = Convert.ToDateTime(rowread["manufac_date"]);
+                acobj.Total = Convert.ToInt32(rowread["total"]);
+                viewlist.Add(acobj); ;
+             //   acobj.Item_name = (rowread["item_name"]).ToString();
+
+              
+            }
+            return viewlist;
+        }
+
+        public int Delete(int id)
+        {
+            //1. open sqlconnection
+            SqlConnection con = new SqlConnection("server=intvmsql01;user id=pj01tms55_1718;password=tcstvm;database=db01tms55_1718"); 
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("del_1412", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@oid", id);
+            cmd.Parameters.AddWithValue("@quantity", quantity);
+            int rowaffected = cmd.ExecuteNonQuery();
+            return rowaffected;
+        }
+
+
+
+
+    }
+}
