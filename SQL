@@ -1,0 +1,91 @@
+create table item_1411
+(item_id int identity(101,1) unique,
+ item_name varchar(20) ,
+ price int,
+ manufac_date date,
+ qavail int)
+
+ create table cart_1411
+ (order_id int identity(5001,1) primary key ,
+  quantity int,
+  total int,
+  iname varchar(20),
+  cname varchar(20),
+  phone bigint,
+  email varchar(30),
+  order_date date)
+
+
+  drop table cart_1411
+
+
+  create procedure order_1414
+   (@quantity int,
+   @iname varchar(20),
+  @cname varchar(20),
+  @phone bigint,
+  @email varchar(30),
+  @order_date date,
+  @total int,
+  @order_id int out)
+  as
+  begin
+  insert into cart_1411
+  values(@quantity,@total,@iname,@cname,@phone,@email,@order_date)
+  set @order_id=@@identity;
+  end
+
+
+  create procedure view_1413
+   as
+  begin
+  select order_id,item_name,quantity,cname,phone,email,manufac_date,total
+  from item_1411 inner join cart_1411
+  on item_1411.item_name=cart_1411.iname;
+  
+  end
+
+  select*
+  from cart_1411;
+  create procedure order_1413
+   (@quantity int,
+   @total int,
+   @iname varchar(20),
+  @cname varchar(20),
+  @phone bigint,
+  @email varchar(30),
+  @order_date date,
+  @order_id int out)
+  as
+  begin
+  insert into cart_1411
+  values(@quantity,@iname,@total,@cname,@phone,@email,@order_date)
+  set @order_id=@@identity;
+  end
+
+   create procedure del_1412
+ @oid int 
+ as 
+ begin
+ delete from cart_1411
+ where cart_1411.order_id=@oid;
+ end
+
+  create procedure order_1416
+   (@quantity int,
+   @iname varchar(20),
+  @cname varchar(20),
+  @phone bigint,
+  @email varchar(30),
+  @order_date date,
+  @total int,
+  @order_id int out)
+  as
+  begin
+  insert into cart_1411
+  values(@quantity,@total,@iname,@cname,@phone,@email,@order_date)
+  set @order_id=@@identity;
+  update item_1411
+  set qavail=qavail-@quantity;
+  where item_1411.item_name=@iname;
+  end
