@@ -1,0 +1,93 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="ADD_ORDER.aspx.cs" Inherits="WebApplication3.ADD_ORDER" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+    .auto-style1 {
+        width: 100%;
+    }
+    .auto-style2 {
+        width: 242px;
+    }
+    .auto-style3 {
+        width: 292px;
+    }
+</style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <table class="auto-style1">
+    <tr>
+        <td class="auto-style2">ITEM NAME<br />
+        </td>
+        <td class="auto-style3">
+            <asp:DropDownList ID="DropDownList1" runat="server">
+                <asp:ListItem>memory card</asp:ListItem>
+                <asp:ListItem>laptop</asp:ListItem>
+                <asp:ListItem>wallet</asp:ListItem>
+                <asp:ListItem>power bank</asp:ListItem>
+            </asp:DropDownList>
+          
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="auto-style2">QUANTITY<br />
+        </td>
+        <td class="auto-style3">
+            <asp:TextBox ID="TextBox2" runat="server" TextMode="Number"></asp:TextBox>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="auto-style2">CUSTOMER NAME<br />
+        </td>
+        <td class="auto-style3">
+            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="auto-style2">CONTACT<br />
+        </td>
+        <td class="auto-style3">
+            <asp:TextBox ID="TextBox4" runat="server" MaxLength="10" TextMode="Phone"></asp:TextBox>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="auto-style2">EMAIL<br />
+        </td>
+        <td class="auto-style3">
+            <asp:TextBox ID="TextBox5" runat="server" TextMode="Email"></asp:TextBox>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="auto-style2">&nbsp;</td>
+        <td class="auto-style3">&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="auto-style2">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">main page</asp:LinkButton>
+        </td>
+        <td class="auto-style3">
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="SUBMIT" Width="215px" />
+        </td>
+        <td>
+            <br />
+            <asp:Button ID="Button2" runat="server" Text="VIEW" OnClick="Button2_Click" />
+            <br />
+        </td>
+    </tr>
+    <tr>
+        <td class="auto-style2">&nbsp;</td>
+        <td class="auto-style3">&nbsp;</td>
+        <td>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </td>
+    </tr>
+</table>
+</asp:Content>
